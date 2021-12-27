@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:9.6
+    container_name: postgres
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-vol:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: dados_publicos:1.0
+    container_name: app
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    volumes:
+      - src:/app/src
+      - tests:/app/tests
+
+volumes:
+  src:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/src
+  tests:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/tests
+  postgres-vol: #https://forums.docker.com/t/postgres-in-wsl-2-with-docker-operation-not-permitted-when-i-share-volumes-enter-windows-folder/92161/4

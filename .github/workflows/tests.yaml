@@ -1,0 +1,34 @@
+name: tests
+
+on: push
+
+env:
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: postgres
+  POSTGRES_DB: rf_dados_publicos_cnpj
+  POSTGRES_PORT: 5432
+
+jobs:
+  run_tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        name: clone this repo
+
+      - name: build img
+        run: make build-img
+
+      - name: create local env file
+        run: |
+          touch .env
+          echo POSTGRES_USER=${{ env.POSTGRES_USER }} >> .env
+          echo POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
+          echo POSTGRES_HOST=${{ env.POSTGRES_HOST }} >> .env
+          echo POSTGRES_DB=${{ env.POSTGRES_DB }} >> .env
+          echo POSTGRES_PORT=${{ env.POSTGRES_PORT }} >> .env
+
+      - name: run tests
+        run: make tests

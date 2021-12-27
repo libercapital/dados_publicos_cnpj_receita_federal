@@ -1,0 +1,8 @@
+ipdb==0.13.9
+pytest==5.3.2
+pytest-cov==2.8.1
+pytest-mock==1.6.3
+python-dateutil==2.8.0
+python-dotenv==0.11.0
+pytest-pythonpath==0.7.3
+pytest-env==0.6.2

@@ -1,0 +1,42 @@
+# https://mermaid-js.github.io/mermaid/#/
+# https://mermaid.live/edit
+
+# PROCESSAMENTO
+flowchart TD
+    subgraph Engine
+    t1[processar empresas]
+    t2[(tbl rf_company_root)]
+    t3[processar socios]
+    t4[(tbl rf_partners)]
+    t5[processar simples]
+    t6[(tbl rf_company_root_simples)]
+    t7[processar reg. trib]
+    t8[(tbl rf_company_tax_regime)]
+    t9[processar estabelecimento]
+    t10[(tbl rf_company)]
+    t11[[Fim]]
+    t1 -- +-47milhões linhas --> t2
+    t2 --> t3
+    t3 -- +-22milhões linhas --> t4
+    t4 --> t5
+    t5 -- +-30milhões linhas --> t6
+    t6 --> t7
+    t7 -- +-10milhões linhas --> t8
+    t8 --> t9
+    t9 -- +-51milhões linhas --> t10
+    t10 --> t11
+    end
+    subgraph Download/Unzip/Io
+    e1[verificar arquivos novos]
+    e2{Precisa Download}
+    e3[Download]
+    e4[Extrai arquivos zip p/ csv]
+    e5((Fim))
+    e1 --> e2
+    e2 -- Sim --> e3
+    e3 --> e4
+    e2 --> e5
+    e4 -- Não --> e5
+    end
+
+
