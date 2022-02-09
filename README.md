@@ -64,7 +64,7 @@ O arquivo [`src/db_models/df_to_db.py`](src/db_models/df_to_db.py) se encarrega 
 dado um dataframe de uma forma otimizada.
 
 Além disso as chaves primarias e os índices de cada base/tabela foram retirados durante o processamento para reduzir o
-tempo de carga/`COPY` (dado as verificações que são necessárias). Ao final do processamento osíndices são novamente
+tempo de carga/`COPY` (dado as verificações que são necessárias). Ao final do processamento os índices são novamente
 inseridos.
 
 Devido a quantidade **massiva** de dados a serem processados, a leitura de todas as tabelas conta com chuncks
@@ -91,8 +91,8 @@ Esse reposítorio foi desenvolvido utilizando imagens Docker, Makefile, Python e
 
 Caso você estiver utilizando Windows você precisará utilizar o WSL para rodar imagens Docker.
 
-Nesse [link](https://github.com/codeedu/wsl2-docker-quickstart) tem um tutorial bem completo de como rodar o [WSL +
-Docker] do FullCycle.
+Nesse [link](https://github.com/codeedu/wsl2-docker-quickstart) tem um tutorial bem completo de como rodar
+o [WSL + Docker] do FullCycle.
 
 ## **Fluxograma**
 
@@ -120,31 +120,29 @@ $ make
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_HOST=postgres
-POSTGRES_DB=rf_dados_publicos_cnpj
 POSTGRES_PORT=5432
-DB_MODEL_COMPANY=
-DB_MODEL_COMPANY_TAX_REGIME=
-DB_MODEL_COMPANY_ROOT=
-DB_MODEL_COMPANY_ROOT_SIMPLES=
-DB_MODEL_PARTNERS=
-DB_MODEL_REF_DATE=
+POSTGRES_DB=rf_dados_publicos_cnpj
+DB_MODEL_COMPANY=rf_company
+DB_MODEL_COMPANY_TAX_REGIME=rf_company_tax_regime
+DB_MODEL_COMPANY_ROOT=rf_company_root
+DB_MODEL_COMPANY_ROOT_SIMPLES=rf_company_root_simples
+DB_MODEL_PARTNERS=rf_partners
+DB_MODEL_REF_DATE=rf_ref_date
 ```
 
 Por default os nomes da tabela serão esses (mais detalhes no arquivo [settings.py](src/settings.py)):
 
-````python
-DB_NAME = 'rf_dados_publicos_cnpj'
-DB_MODEL_COMPANY = 'rf_company'
-DB_MODEL_COMPANY_TAX_REGIME = 'rf_company_tax_regime'
-DB_MODEL_COMPANY_ROOT = 'rf_company_root'
-DB_MODEL_COMPANY_ROOT_SIMPLES = 'rf_company_root_simples'
-DB_MODEL_PARTNERS = 'rf_partners'
-DB_MODEL_REF_DATE = 'rf_ref_date'
-````
+> Para se conectar no postgres em algum visualizador (exemplo: DBeaver) coloque as seguintes configurações se você as configurou conforme mostrado acima: <br>
+> host: localhost <br>
+> database: rf_dados_publicos_cnpj <br>
+> porta: 5433 (ver docker-compose.yaml) <br>
+> usuário: postgres
+> senha: postgres
 
 3. Crie a image docker utilizada no processamento:
 
 ```terminal
+$ make build-img
 $ make build-img
 ```
 
