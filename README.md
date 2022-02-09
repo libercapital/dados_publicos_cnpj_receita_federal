@@ -12,6 +12,7 @@ para um banco relacional ([postgres](https://www.postgresql.org/)) utilizando Do
 - [Introdução](#Introdução)
 - [Metodologia](#Metodologia)
 - [Arquitetura do Postgres](#Arquitetura-do-Postgres)
+- [Tecnologias utilizadas](#Tecnologias-utilizadas)
 - [Fluxograma](#Fluxograma)
 - [Estrutura do repositório](#Estrutura-do-repositório)
 - [Setup & Launch](#Setup-&-Launch)
@@ -83,6 +84,15 @@ Total de linhas ao final de todo processamento: ~160 milhões de linhas
 ## **Arquitetura do Postgres**
 
 As tabelas criadas no banco postgres podem ser visualizadas no arquivo [models.py](src/db_models/models.py)
+
+## Tecnologias utilizadas
+
+Esse reposítorio foi desenvolvido utilizando imagens Docker, Makefile, Python e banco de dados Postgresql.
+
+Caso você estiver utilizando Windows você precisará utilizar o WSL para rodar imagens Docker.
+
+Nesse [link](https://github.com/codeedu/wsl2-docker-quickstart) tem um tutorial bem completo de como rodar o [WSL +
+Docker] do FullCycle.
 
 ## **Fluxograma**
 
@@ -224,8 +234,9 @@ uptime em produção é:
 
 ## **Estrutura do repositório**
 
-A pasta `src/data/` contem todos os arquivos `.zip`, `.csv` e `.jsons` obtidos em [`http://200.152.38.155/CNPJ`](http://200.152.38.155/CNPJ) separados
-por data de referência (a pasta `src/data/` está no gitignore dado o tamanho de seus arquivos).
+A pasta `src/data/` contem todos os arquivos `.zip`, `.csv` e `.jsons` obtidos
+em [`http://200.152.38.155/CNPJ`](http://200.152.38.155/CNPJ) separados por data de referência (a pasta `src/data/` está
+no gitignore dado o tamanho de seus arquivos).
 
 A pasta `src/db_models/` contém todos os scripts necessários para a manipular os modelos do banco de dados e auxiliar no
 carregamento dos dados no banco de dados.
