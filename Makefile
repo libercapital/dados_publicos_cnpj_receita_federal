@@ -8,9 +8,10 @@ all:
 	@echo "########################################################################################################################"
 	@echo "[SESSION] Launch"
 	@echo "make up ......................................... docker-compose up -d"
+	@echo "make stop ....................................... docker-compose stop"
 	@echo "make down ....................................... docker-compose down"
 	@echo "make app ........................................ run container app"
-	@echo "make rm ......................................... remove all stopped containers"
+	@echo "make rm ......................................... remove all exited containers and all dangling volumes"
 	@echo ""
 	@echo "########################################################################################################################"
 	@echo "[SESSION] DB"
@@ -50,6 +51,12 @@ up:
 	@docker-compose up -d
 	@echo ""
 
+stop:
+	@echo "---------------------------------------"
+	@echo "docker-compose stop"
+	@docker-compose stop
+	@echo ""
+
 down:
 	@echo "---------------------------------------"
 	@echo "docker-compose down"
@@ -62,8 +69,15 @@ app: up
 	@echo ""
 
 rm: down
+	@echo ""
+	@echo ""
 	@echo "remove all stopped containers"
-	@docker rm $(docker ps -a -q)
+	command docker ps -aqf status=exited | xargs -r docker rm
+	@echo ""
+	@echo ""
+	@echo "remove all dangling volumes"
+	@# The dangling filter matches on all volumes not referenced by any containers
+	command docker volume ls -qf dangling=true | xargs -r docker volume rm
 	@echo ""
 
 db-create: up
@@ -78,6 +92,8 @@ db-create-tables: up
 
 db-setup: up
 	@echo "SETUP"
+	@echo "sleeping 40 seconds in order to postgres start-up"
+	@sleep 40
 	@echo "Creating db"
 	@docker-compose run app python -c "from src.db_models.utils import create_db, create_or_drop_all_tables; create_db();create_or_drop_all_tables(cmd='create')"
 	@echo ""
