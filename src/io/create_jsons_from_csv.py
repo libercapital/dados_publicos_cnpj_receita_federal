@@ -31,9 +31,10 @@ def main(ref_date=None):
 
 def create_json(path_file, path_unziped, json_name):
     df = pd.read_csv(path_file, sep=';', encoding='cp1252', header=None)
+    df.sort_values(df.columns[0], inplace=True)
     _dict = dict(df.values)
     path_json = os.path.join(path_unziped, json_name)
-    with open(path_json, 'w', encoding='cp1252') as f:
+    with open(path_json, 'w', encoding='utf-8') as f:
         print(f"creating: '{path_json}'", end=' ... ', flush=True)
         json.dump(_dict, f, ensure_ascii=False)
         print('done!')

@@ -61,7 +61,7 @@ class EngineCore(ABC):
 
     def load_dicts_code_to_name(self, file_name):
         full_path_file_name = os.path.join(DATA_FOLDER, self._ref_date, UNZIPED_FOLDER_NAME, file_name)
-        with open(full_path_file_name, encoding='cp1252') as json_file:
+        with open(full_path_file_name, encoding='utf-8') as json_file:
             return json.load(json_file)
 
     def get_all_jsons(self):

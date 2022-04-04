@@ -43,25 +43,25 @@ def test_engine_partners_parse_file(mocker):
 
     data_expected = [
         ["38424667", "2", "DAIANE", "***123456**", "49", "2020-09-11", None, "***000000**", None, "00", "4",
-         "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", None, "31 a 40 ANOS"],
+         "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", "NÃO INFORMADA", "31 a 40 ANOS"],
         ["38424722", "2", "EDNAILTON", "***123456**", "49", "2020-09-11", None, "***000000**", None, "00",
-         "4", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", None, "31 a 40 ANOS"],
+         "4", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", "NÃO INFORMADA", "31 a 40 ANOS"],
         ["38424742", "2", "HOMERO", "***123456**", "65", "2020-08-13", None, "***000000**", None, "00", "7",
-         "PESSOA FÍSICA", "TITULAR PESSOA FÍSICA RESIDENTE OU DOMICILIADO NO BRASIL", None, "61 a 70 ANOS"],
+         "PESSOA FÍSICA", "TITULAR PESSOA FÍSICA RESIDENTE OU DOMICILIADO NO BRASIL", "NÃO INFORMADA", "61 a 70 ANOS"],
         ["38424786", "2", "LUCIANA", "***123456**", "49", "2020-09-11", None, "***000000**", None, "00",
-         "6", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", None, "51 a 60 ANOS"],
+         "6", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", "NÃO INFORMADA", "51 a 60 ANOS"],
         ["34717866", "2", "EDER", "***123456**", "22", "2019-08-30", None, "***000000**", None, "00",
-         "4", "PESSOA FÍSICA", "SÓCIO", None, "31 a 40 ANOS"],
+         "4", "PESSOA FÍSICA", "SÓCIO", "NÃO INFORMADA", "31 a 40 ANOS"],
         ["34717866", "2", "AGNALDO", "***123456**", "49", "2019-08-30", None, "***000000**", None,
-         "00", "4", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", None, "31 a 40 ANOS"],
+         "00", "4", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", "NÃO INFORMADA", "31 a 40 ANOS"],
         ["34717866", "2", "THATIELY", "***123456**", "22", "2019-08-30", None, "***000000**",
-         None, "00", "5", "PESSOA FÍSICA", "SÓCIO", None, "41 a 50 ANOS"],
+         None, "00", "5", "PESSOA FÍSICA", "SÓCIO", "NÃO INFORMADA", "41 a 50 ANOS"],
         ["38424860", "2", "DIONE", "***123456**", "49", "2020-09-09", None, "***000000**", None,
-         "00", "4", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", None, "31 a 40 ANOS"],
+         "00", "4", "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", "NÃO INFORMADA", "31 a 40 ANOS"],
         ["38424860", "2", "SILASNE", "***123456**", "49", "2020-09-09", None, "***000000**", None, "00", "5",
-         "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", None, "41 a 50 ANOS"],
+         "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", "NÃO INFORMADA", "41 a 50 ANOS"],
         ["38424994", "2", "SIL", "***123456**", "49", "2020-09-11", None, "***000000**", None, "00", "4",
-         "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", None, "31 a 40 ANOS"]
+         "PESSOA FÍSICA", "SÓCIO-ADMINISTRADOR", "NÃO INFORMADA", "31 a 40 ANOS"]
     ]
 
     df_expected = pandas.DataFrame(data=data_expected,
