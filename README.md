@@ -136,13 +136,12 @@ Por default os nomes da tabela serão esses (mais detalhes no arquivo [settings.
 > host: localhost <br>
 > database: rf_dados_publicos_cnpj <br>
 > porta: 5433 (ver docker-compose.yaml) <br>
-> usuário: postgres
+> usuário: postgres <br>
 > senha: postgres
 
 3. Crie a image docker utilizada no processamento:
 
 ```terminal
-$ make build-img
 $ make build-img
 ```
 
