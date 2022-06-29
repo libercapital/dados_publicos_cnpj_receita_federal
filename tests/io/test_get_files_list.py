@@ -15,15 +15,15 @@ class ObjectFakeText:
         return self.txt
 
 
-def test_get_files_dict_keys():
-    dict_files = get_files_dict()
+def test_get_files_dict_keys(fixture_get_files_dict):
+    dict_files = fixture_get_files_dict
     keys = ['SOCIOS', 'EMPRESAS', 'ESTABELECIMENTOS', 'TABELAS', 'TAX_REGIME', 'folder_ref_date_save_zip']
 
     assert sorted(dict_files.keys()) == sorted(keys)
 
 
-def test_get_files_dict_keys_sub_dicts():
-    dict_files = get_files_dict()
+def test_get_files_dict_keys_sub_dicts(fixture_get_files_dict):
+    dict_files = fixture_get_files_dict
     tbls = ['SOCIOS', 'EMPRESAS', 'ESTABELECIMENTOS', 'TABELAS', 'TAX_REGIME']
 
     for tbl in tbls:
@@ -33,36 +33,36 @@ def test_get_files_dict_keys_sub_dicts():
                 ['last_modified', 'file_size_bytes', 'link_to_download', 'path_save_file'])
 
 
-def test_get_files_dict_empresas():
-    dict_files = get_files_dict()
+def test_get_files_dict_empresas(fixture_get_files_dict):
+    dict_files = fixture_get_files_dict
     dict_files_target = dict_files['EMPRESAS']
 
     assert len(dict_files_target.keys()) == 10
 
 
-def test_get_files_dict_estabelecimentos():
-    dict_files = get_files_dict()
+def test_get_files_dict_estabelecimentos(fixture_get_files_dict):
+    dict_files = fixture_get_files_dict
     dict_files_target = dict_files['ESTABELECIMENTOS']
 
     assert len(dict_files_target.keys()) == 10
 
 
-def test_get_files_dict_socios():
-    dict_files = get_files_dict()
+def test_get_files_dict_socios(fixture_get_files_dict):
+    dict_files = fixture_get_files_dict
     dict_files_target = dict_files['SOCIOS']
 
     assert len(dict_files_target.keys()) == 10
 
 
-def test_get_files_dict_tabelas():
-    dict_files = get_files_dict()
+def test_get_files_dict_tabelas(fixture_get_files_dict):
+    dict_files = fixture_get_files_dict
     dict_files_target = dict_files['TABELAS']
 
     assert len(dict_files_target.keys()) == 7
 
 
-def test_get_files_dict_tax_regime():
-    dict_files = get_files_dict()
+def test_get_files_dict_tax_regime(fixture_get_files_dict):
+    dict_files = fixture_get_files_dict
     dict_files_target = dict_files['TAX_REGIME']
 
     assert len(dict_files_target.keys()) == 1
