@@ -69,7 +69,7 @@ inseridos.
 
 Devido a quantidade **massiva** de dados a serem processados, a leitura de todas as tabelas conta com chuncks
 de `100.000` linhas por "rodada"/loop por limitações de memória RAM (isso pode variar de acordo com a máquina que se
-executa os scripts). Esse valor pode ser alterado em [settings.py](src/settings.py):
+executa os scripts). Esse valor pode ser alterado em no `.env`:
 
 Ao fim do processamento as 5 tabelas são populadas:
 
@@ -117,6 +117,7 @@ $ make
 2. Criar o `.env` na raiz do repostório (mesmo diretório do `docker-compose.yaml`):
 
 ```env
+N_ROWS_CHUNKSIZE=100000
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_HOST=postgres

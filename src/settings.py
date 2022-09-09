@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import create_engine
 
-N_ROWS_CHUNKSIZE = 100_000
+N_ROWS_CHUNKSIZE = int(os.getenv('N_ROWS_CHUNKSIZE', 0)) or 100_000
 
 POSTGRES_USER = os.getenv('POSTGRES_USER') or 'postgres'
 POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD') or 'postgres'

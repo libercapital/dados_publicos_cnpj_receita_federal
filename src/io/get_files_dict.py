@@ -55,11 +55,11 @@ def main():
                                          'link_to_download': f"{CORE_URL_FILES}/{file_name}",
                                          'path_save_file': os.path.join(SRC_PATH, DATA_FOLDER, ref_date, file_name)}
                              }
-                if 'SOCIOCSV' in file_name:
+                if 'Socios' in file_name:
                     dict_files_url['SOCIOS'].update(dict_core)
-                elif 'EMPRECSV' in file_name:
+                elif 'Empresas' in file_name:
                     dict_files_url['EMPRESAS'].update(dict_core)
-                elif 'ESTABELE' in file_name:
+                elif 'Estabelecimentos' in file_name:
                     dict_files_url['ESTABELECIMENTOS'].update(dict_core)
                 else:
                     dict_files_url['TABELAS'].update(dict_core)

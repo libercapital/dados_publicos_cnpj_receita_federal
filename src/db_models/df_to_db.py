@@ -1,17 +1,20 @@
+from datetime import datetime
 from io import StringIO
 
 
-def df_to_database(connection, df, table_name, sep='\x01', encoding='utf-8'):
+def df_to_database(engine, df, table_name, sep='\x01', encoding='utf-8'):
     try:
         output = StringIO()
         df.to_csv(output, sep=sep, header=False, encoding=encoding, index=False)
         output.seek(0)
 
         # Insert data
+        connection = engine.raw_connection()
         cursor = connection.cursor()
+        print(f"\t\t{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}  | sending to db", flush=True)
         cursor.copy_from(output, table_name, sep=sep, null='')
         connection.commit()
-
+        print(f"\t\t{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}  | done", flush=True)
 
     except Exception:
 
@@ -27,8 +30,8 @@ def df_to_database(connection, df, table_name, sep='\x01', encoding='utf-8'):
         output.seek(0)
 
         # Insert data
+        connection = engine.raw_connection()
         cursor = connection.cursor()
         cursor.execute("rollback")  # rollback
         cursor.copy_from(output, table_name, sep=sep, null='')
         connection.commit()
-        cursor.close()

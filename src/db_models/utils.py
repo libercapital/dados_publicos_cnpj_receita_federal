@@ -29,7 +29,7 @@ def create_index(table_name: str, idx: str, column: str):
         print('Index already exists... exiting')
         return
     sql = f"""create index {idx} on {table_name}({column})"""
-    print(f"creating index.. this can take a while.... ['{sql}'] ", flush=True, end='...')
+    print(f"creating index.. this can take a while.... ['{sql}'] ", flush=True)
     settings.ENGINE.execute(sql)
     print("Created")
 
@@ -48,7 +48,7 @@ def check_pk_exists(table_name: str):
 def delete_pk(table_name: str, pk: str):
     if check_pk_exists(table_name):
         sql = f"""alter table {table_name} drop constraint {pk}"""
-        print(f"dropping pk.... ['{sql}'] ", flush=True, end='...')
+        print(f"dropping pk.... ['{sql}'] ", flush=True)
         settings.ENGINE.execute(sql)
         print("dropped")
         return
