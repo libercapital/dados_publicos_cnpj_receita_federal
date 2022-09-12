@@ -1,6 +1,8 @@
-from src.io.get_files_dict import main as get_files_dict
-import pandas as pd
 import json
+
+import pandas as pd
+
+from src.io.get_files_dict import main as get_files_dict
 
 dict_files = get_files_dict()
 
@@ -11,7 +13,7 @@ def test_json_data_url_current_vs_local_cnaes():
 
     _key = None
     for key in dict_files['TABELAS']:
-        if 'CNAE' in key:
+        if 'Cnaes' in key:
             _key = key
             break
 
@@ -38,7 +40,7 @@ def test_json_data_url_current_vs_local_natju():
 
     _key = None
     for key in dict_files['TABELAS']:
-        if 'NATJUCSV' in key:
+        if 'Naturezas' in key:
             _key = key
             break
 
@@ -65,7 +67,7 @@ def test_json_data_url_current_vs_local_qual_socio():
 
     _key = None
     for key in dict_files['TABELAS']:
-        if 'QUALSCSV' in key:
+        if 'Qualificacoes' in key:
             _key = key
             break
 
@@ -92,7 +94,7 @@ def test_json_data_url_current_vs_local_motivos():
 
     _key = None
     for key in dict_files['TABELAS']:
-        if 'MOTICSV' in key:
+        if 'Motivos' in key:
             _key = key
             break
 
@@ -119,7 +121,7 @@ def test_json_data_url_current_vs_local_pais():
 
     _key = None
     for key in dict_files['TABELAS']:
-        if 'PAISCSV' in key:
+        if 'Paises' in key:
             _key = key
             break
 
@@ -146,7 +148,7 @@ def test_json_data_url_current_vs_local_munic():
 
     _key = None
     for key in dict_files['TABELAS']:
-        if 'MUNICCSV' in key:
+        if 'Municipios' in key:
             _key = key
             break
 

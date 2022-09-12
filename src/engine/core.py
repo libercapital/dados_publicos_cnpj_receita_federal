@@ -1,6 +1,7 @@
 import json
 import os
 from abc import ABC, abstractmethod
+from datetime import datetime
 
 from src import DATA_FOLDER, UNZIPED_FOLDER_NAME
 from src import settings
@@ -12,9 +13,9 @@ from src.io.get_last_ref_date import main as get_last_ref_date
 
 class EngineCore(ABC):
 
-    def __init__(self, type_file, table_model, n_rows_chunk=settings.N_ROWS_CHUNKSIZE, ref_date=None):
+    def __init__(self, type_file, table_model, n_rows_chunk=None, ref_date=None):
         self._type_file = type_file
-        self._n_rows_chunk = n_rows_chunk
+        self._n_rows_chunk = n_rows_chunk or settings.N_ROWS_CHUNKSIZE
         self._ref_date = ref_date
         self.get_ref_date()
         self.get_all_jsons()
@@ -85,7 +86,8 @@ class EngineCore(ABC):
         pass
 
     def parse_all_files(self):
-        for file in sorted(self.list_files_full_path):
+        for e, file in enumerate(sorted(self.list_files_full_path), 1):
+            print(f"[{e:2}/{len(self.list_files_full_path)}] Getting file {os.path.basename(file)}")
             self.parse_file(file=file)
 
     @abstractmethod
@@ -93,10 +95,14 @@ class EngineCore(ABC):
         pass
 
     def _display_status(self, dict_status):
-        filename = dict_status['filename']
         total_rows_file = dict_status['total_rows_file']
         lasts_this_round = dict_status['lasts_this_round']
         lasts_since_begin_file = dict_status['lasts_since_begin_file']
         lasts_since_begin_global = dict_status['lasts_since_begin_global']
+        ingestion_rate_global = self._total_rows_global / max(lasts_since_begin_global, 1)
+        now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"\t\t{now:<20} | rows: {total_rows_file:<10_}/{self._total_rows_global:<10_}")
         print(
-            f"{filename} | rows this file {total_rows_file:<10_} rows global {self._total_rows_global:<10_} | this round {lasts_this_round:<3}, since begin file {lasts_since_begin_file}, since begin global {lasts_since_begin_global} [seconds]")
+            f"\t\t{now:<20} | time: {lasts_this_round:<.2f}, since begin file {lasts_since_begin_file}, since begin global {lasts_since_begin_global} [s]")
+        print(f"\t\t{now:<20} | rate: avg insert rows/s global: {ingestion_rate_global:.2f}")
+        print("#" * 80)

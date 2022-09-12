@@ -24,7 +24,7 @@ def test_get_last_ref_date_all_one_date(mocker):
     mock_requests.get.return_value = ObjectFakeText(open(html_path))
 
     ref_date = get_last_ref_date()
-    ref_date_expected = '2021-09-09'
+    ref_date_expected = '2022-08-15'
 
     assert ref_date == ref_date_expected
 

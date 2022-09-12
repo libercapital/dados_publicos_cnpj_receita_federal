@@ -80,16 +80,7 @@ def test_get_last_ref_date_mock_empresas(mocker):
 
     assert len(dict_files_target.keys()) == 10
 
-    list_expected_files = ['K3241.K03200Y0.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y1.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y2.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y3.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y4.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y5.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y6.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y7.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y8.D10814.EMPRECSV.zip',
-                           'K3241.K03200Y9.D10814.EMPRECSV.zip']
+    list_expected_files = [f'Empresas{r}.zip' for r in range(10)]
 
     assert sorted(dict_files_target.keys()) == sorted(list_expected_files)
 
@@ -106,16 +97,7 @@ def test_get_last_ref_date_mock_estabelecimentos(mocker):
 
     assert len(dict_files_target.keys()) == 10
 
-    list_expected_files = ['K3241.K03200Y0.D10814.ESTABELE.zip',
-                           'K3241.K03200Y1.D10814.ESTABELE.zip',
-                           'K3241.K03200Y2.D10814.ESTABELE.zip',
-                           'K3241.K03200Y3.D10814.ESTABELE.zip',
-                           'K3241.K03200Y4.D10814.ESTABELE.zip',
-                           'K3241.K03200Y5.D10814.ESTABELE.zip',
-                           'K3241.K03200Y6.D10814.ESTABELE.zip',
-                           'K3241.K03200Y7.D10814.ESTABELE.zip',
-                           'K3241.K03200Y8.D10814.ESTABELE.zip',
-                           'K3241.K03200Y9.D10814.ESTABELE.zip']
+    list_expected_files = [f'Estabelecimentos{r}.zip' for r in range(10)]
 
     assert sorted(dict_files_target.keys()) == sorted(list_expected_files)
 
@@ -132,16 +114,7 @@ def test_get_last_ref_date_mock_socios(mocker):
 
     assert len(dict_files_target.keys()) == 10
 
-    list_expected_files = ['K3241.K03200Y0.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y1.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y2.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y3.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y4.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y5.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y6.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y7.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y8.D10814.SOCIOCSV.zip',
-                           'K3241.K03200Y9.D10814.SOCIOCSV.zip']
+    list_expected_files = [f'Socios{r}.zip' for r in range(10)]
 
     assert sorted(dict_files_target.keys()) == sorted(list_expected_files)
 
@@ -158,12 +131,13 @@ def test_get_last_ref_date_mock_tabelas(mocker):
 
     assert len(dict_files_target.keys()) == 7
 
-    list_expected_files = ['F.K03200$W.SIMPLES.CSV.D10814.zip',
-                           'F.K03200$Z.D10814.CNAECSV.zip',
-                           'F.K03200$Z.D10814.MOTICSV.zip',
-                           'F.K03200$Z.D10814.MUNICCSV.zip',
-                           'F.K03200$Z.D10814.NATJUCSV.zip',
-                           'F.K03200$Z.D10814.PAISCSV.zip',
-                           'F.K03200$Z.D10814.QUALSCSV.zip']
+    list_expected_files = ['Simples.zip',
+                           'Cnaes.zip',
+                           'Motivos.zip',
+                           'Municipios.zip',
+                           'Naturezas.zip',
+                           'Paises.zip',
+                           'Qualificacoes.zip'
+                           ]
 
     assert sorted(dict_files_target.keys()) == sorted(list_expected_files)

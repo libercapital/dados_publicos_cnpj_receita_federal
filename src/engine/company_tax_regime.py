@@ -14,8 +14,9 @@ _type_file = ['IMUNES E ISENTAS', 'LUCRO ARBITRADO', 'LUCRO PRESUMIDO', 'LUCRO R
 
 
 class CompanyTaxRegime(EngineCore):
-    def __init__(self, type_file=_type_file, table_model=CompanyTaxRegimeModel, n_rows_chunk=100_000,
-                 ref_date=get_last_ref_date()):
+    def __init__(self, type_file=_type_file, table_model=CompanyTaxRegimeModel, n_rows_chunk=None,
+                 ref_date=None):
+        ref_date = ref_date or get_last_ref_date()
         super().__init__(type_file=type_file, table_model=table_model, n_rows_chunk=n_rows_chunk, ref_date=ref_date)
         self._total_rows_global = 0
         self._start_time_all_files = time.time()
@@ -26,7 +27,7 @@ class CompanyTaxRegime(EngineCore):
         self.create_pk_and_indexes()
 
     def delete_pk_and_indexes(self):
-        delete_pk(table_name=self._table_name, pk='rf_company_tax_regime_pkey')
+        delete_pk(table_name=self._table_name, pk=f"{settings.DB_MODEL_COMPANY_TAX_REGIME}_pkey")
         indexes_names = [f'ix_{self._table_name}_{col_index}' for col_index in self._tbl.get_index_cols()]
         for idx in indexes_names:
             delete_index(table_name=self._table_name, idx=idx)
@@ -38,7 +39,6 @@ class CompanyTaxRegime(EngineCore):
 
     def parse_file(self, file):
         _, filename = os.path.split(file)
-        connection = settings.ENGINE.raw_connection()
         dict_args_read_csv = self._dict_args_read_csv
         dict_args_read_csv['filepath_or_buffer'] = file
         dict_args_read_csv['names'] = self._cols[:self._n_raw_columns]
@@ -54,7 +54,7 @@ class CompanyTaxRegime(EngineCore):
             _df['cnpj'] = _df['cnpj'].str.zfill(14)
             _df['cnpj_root'] = _df['cnpj'].str[:8]
             _df = _df.reindex(columns=self._cols)
-            df_to_database(connection=connection, df=_df, table_name=self._table_name)
+            df_to_database(engine=settings.ENGINE, df=_df, table_name=self._table_name)
             self._total_rows_global += self._n_rows_chunk
             total_rows_file += self._n_rows_chunk
             lasts_this_round = round(time.time() - start_loop, 2)

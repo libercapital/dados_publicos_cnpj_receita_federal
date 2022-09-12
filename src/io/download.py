@@ -1,5 +1,7 @@
+import os
 import threading
 import time
+import zipfile
 
 import requests
 
@@ -16,6 +18,7 @@ def main():  # pragma: no cover
     create_folder(dict_files_dict['folder_ref_date_save_zip'])
     started_at = time.time()
     list_threads = []
+    list_needs_download = []
     for tbl in dict_files_dict.keys():
         _dict = dict_files_dict[tbl]
         # skip 'folder_ref_date_save_zip' key (not a dict)
@@ -25,10 +28,31 @@ def main():  # pragma: no cover
             link_to_download = _dict[file]['link_to_download']
             path_save_file = _dict[file]['path_save_file']
             file_size_bytes = _dict[file]['file_size_bytes']
+
+            # check if file is already downloaded in order to not downloaded again
+            try:
+                # try to open file
+                archive = zipfile.ZipFile(path_save_file, 'r')
+                print(f"[x] already downloaded [ ] not fully downloaded: '{path_save_file}'")
+                continue
+            except zipfile.BadZipFile:
+                # if file cannot be opened then it is not ready
+                size_downloaded = os.path.getsize(path_save_file)
+                print(
+                    f"[ ] already downloaded [x] not fully downloaded: '{path_save_file} --- rate:{size_downloaded / file_size_bytes:.1%}")
+                list_needs_download.append(path_save_file)
+
             t = threading.Thread(target=download_file,
                                  args=(file, link_to_download, path_save_file, file_size_bytes, started_at))
             t.start()
             list_threads.append(t)
+
+    print('\n' * 3)
+    if list_needs_download:
+        for e, _file in enumerate(list_needs_download, 1):
+            print(f"[{e:3}]/[{len(list_needs_download):3}] downloading file: {_file}")
+    else:
+        print(f"All files are already downloaded")
 
     for t in list_threads:
         t.join()
@@ -62,7 +86,7 @@ def download_file(file_name, link_to_download, path_save_file, file_size_bytes, 
                                           'speed': speed,
                                           'eta': eta,
                                           }
-                display_progress(dict_status, started_at=started_at, source='Download', th_to_display=0.001)
+                display_progress(dict_status, started_at=started_at, source='Download', th_to_display=0.05)
 
 
 if __name__ == '__main__':
