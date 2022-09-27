@@ -1,0 +1,50 @@
+name: PUR
+
+on:
+  # Allows you to run this workflow manually from the Actions tab or through HTTP API
+  workflow_dispatch:
+
+  schedule:
+    # (UTC TIME) -- every Monday 9:30 GTM -3
+    - cron: '30 11 * * 1'
+
+jobs:
+
+  pur:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: checkout repo
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: install pur
+        run: pip install pur
+
+      - name: run pur
+        run: |
+          echo "# Update pip packages files" >> $GITHUB_STEP_SUMMARY
+          echo "## common" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          pur -r requirements/requirements.txt >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## development" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          pur -r requirements/testing.txt >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "build: pur - automatic updated pip packages at ${{ steps.date.outputs.date }}"
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: pur
+          delete-branch: true
+          title: 'Update pip packages'
+          body: $GITHUB_STEP_SUMMARY
+          draft: false
