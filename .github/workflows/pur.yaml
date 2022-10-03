@@ -26,6 +26,7 @@ jobs:
         run: pip install pur
 
       - name: run pur
+        id: pur_summary
         run: |
           echo "# Update pip packages files" >> $GITHUB_STEP_SUMMARY
           echo "## common" >> $GITHUB_STEP_SUMMARY
@@ -36,6 +37,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           pur -r requirements/testing.txt >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo ::set-output name=github_step_summary::$(echo ${GITHUB_STEP_SUMMARY})
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
@@ -46,5 +48,7 @@ jobs:
           branch: pur
           delete-branch: true
           title: 'Update pip packages'
-          body: $GITHUB_STEP_SUMMARY
+          body: |
+            <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|(Action run)>
+            ${{ steps.pur_summary.outputs.github_step_summary }}
           draft: false
