@@ -37,7 +37,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           pur -r requirements/testing.txt >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "github_step_summary_env=$(echo GITHUB_STEP_SUMMARY)" >> $GITHUB_ENV
+          echo ::set-output name=github_step_summary_env::"$(echo $GITHUB_STEP_SUMMARY)"
 
       - name: Get current date
         id: date
@@ -54,5 +54,5 @@ jobs:
           title: 'Update pip packages'
           body: |
             [Action Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            $github_step_summary_env
+            ${{ steps.pur_summary.outputs.github_step_summary_env }}
           draft: false
