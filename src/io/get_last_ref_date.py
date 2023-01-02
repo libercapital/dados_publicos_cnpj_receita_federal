@@ -3,8 +3,9 @@ from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter, Retry
 
-from src.io import CORE_URL_FILES
+from src.io import CORE_URL_FILES, HEADERS
 
 
 def main():
@@ -12,9 +13,8 @@ def main():
     Get the urls from receita website (to see structure of dict -- see tests)
     :return: dict with urls from files as well as last modified date and size in bytes
     """
-
     # get page content
-    page = requests.get(CORE_URL_FILES)
+    page = requests.get(CORE_URL_FILES, headers=HEADERS)
 
     # BeautifulSoup object
     soup = BeautifulSoup(page.text, 'html.parser')

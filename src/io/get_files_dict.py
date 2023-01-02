@@ -3,9 +3,10 @@ from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter, Retry
 
 from src import SRC_PATH, DATA_FOLDER
-from src.io import CORE_URL_FILES
+from src.io import CORE_URL_FILES, HEADERS
 from src.io.get_last_ref_date import main as get_last_ref_date
 
 
@@ -14,12 +15,11 @@ def main():
     Get the urls from receita website
     :return: dict with urls from files as well as last modified date and size in bytes
     """
-
     # get last ref_date
     ref_date = get_last_ref_date()
 
     # get page content
-    page = requests.get(CORE_URL_FILES)
+    page = requests.get(CORE_URL_FILES, headers=HEADERS)
 
     # BeautifulSoup object
     soup = BeautifulSoup(page.text, 'html.parser')
@@ -67,7 +67,7 @@ def main():
     dict_files_url['folder_ref_date_save_zip'] = os.path.join(SRC_PATH, DATA_FOLDER, ref_date)
 
     # get page of tax regime
-    page_tax_regime = requests.get(f"{CORE_URL_FILES}/anual")
+    page_tax_regime = requests.get(f"{CORE_URL_FILES}/anual", headers=HEADERS)
     soup_tax_regime = BeautifulSoup(page_tax_regime.text, 'html.parser')
 
     table_tax_regime = soup_tax_regime.find('table')

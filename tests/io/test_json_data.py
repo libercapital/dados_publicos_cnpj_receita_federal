@@ -24,7 +24,7 @@ def test_json_data_url_current_vs_local_cnaes():
     _dict = dict(df.values)
 
     # assert len dict
-    assert len(_dict) == len(dict_expected)
+    assert len(_dict) == len(dict_expected), f"missing cnaes {set(_dict) - set(dict_expected)}"
 
     # assert same keys
     assert set(_dict.keys()) - set(dict_expected.keys()) == set()
@@ -51,7 +51,7 @@ def test_json_data_url_current_vs_local_natju():
     _dict = dict(df.values)
 
     # assert len dict
-    assert len(_dict) == len(dict_expected)
+    assert len(_dict) == len(dict_expected), f"missing natju {set(_dict) - set(dict_expected)}"
 
     # assert same keys
     assert set(_dict.keys()) - set(dict_expected.keys()) == set()
@@ -78,7 +78,7 @@ def test_json_data_url_current_vs_local_qual_socio():
     _dict = dict(df.values)
 
     # assert len dict
-    assert len(_dict) == len(dict_expected)
+    assert len(_dict) == len(dict_expected), f"missing quali {set(_dict) - set(dict_expected)}"
 
     # assert same keys
     assert set(_dict.keys()) - set(dict_expected.keys()) == set()
@@ -105,7 +105,7 @@ def test_json_data_url_current_vs_local_motivos():
     _dict = dict(df.values)
 
     # assert len dict
-    assert len(_dict) == len(dict_expected)
+    assert len(_dict) == len(dict_expected), f"missing motivos {set(_dict) - set(dict_expected)}"
 
     # assert same keys
     assert set(_dict.keys()) - set(dict_expected.keys()) == set()
@@ -132,7 +132,7 @@ def test_json_data_url_current_vs_local_pais():
     _dict = dict(df.values)
 
     # assert len dict
-    assert len(_dict) == len(dict_expected)
+    assert len(_dict) == len(dict_expected), f"missing paises {set(_dict) - set(dict_expected)}"
 
     # assert same keys
     assert set(_dict.keys()) - set(dict_expected.keys()) == set()
@@ -159,7 +159,7 @@ def test_json_data_url_current_vs_local_munic():
     _dict = dict(df.values)
 
     # assert len dict
-    assert len(_dict) == len(dict_expected)
+    assert len(_dict) == len(dict_expected), f"missing municipios {set(_dict) - set(dict_expected)}"
 
     # assert same keys
     assert set(_dict.keys()) - set(dict_expected.keys()) == set()
