@@ -4,7 +4,7 @@
 
 Esse repositório consiste na Extração, Transformação e Carregamento (ETL) dos dados públicos dos CNPJ's de todas as ~60
 milhões de empresas do Brasil disponibilizadas pela Receita Federal
-nesse [link](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/consultas/dados-publicos-cnpj)
+nesse [link](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj)
 para um banco relacional ([postgres](https://www.postgresql.org/)) utilizando Docker.
 
 ## **Sumário**
@@ -39,16 +39,15 @@ O processamento total corresponde a um total de ~`20,0 GB` de volume de dados.<b
 
 O layout para cada arquivo, ou seja, como os arquivos `.csv` estão estruturados, pode ser encontrado
 nesse [pdf](docs/NOVOLAYOUTDOSDADOSABERTOSDOCNPJ.pdf) obtido
-nesse [link](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/consultas/arquivos/NOVOLAYOUTDOSDADOSABERTOSDOCNPJ.pdf)
+nesse [link](https://www.gov.br/receitafederal/dados/cnpj-metadados.pdf)
 .
 
-Para o `regime tributário` ver esse [pdf](docs/layout-regime-tributario.pdf) obtido
-nesse [link](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/consultas/arquivos/leiaute-dos-arquivos.pdf)
+Para o `regime tributário` ver esse [pdf](docs/layout-regime-tributario.pdf)
 .
 
 Além disso existem ainda outros arquivos que mapeiam algumas informações de cada `.csv` tal como o código da natureza
 jurídica para seu nome (`2046 -> Sociedade Anônima Aberta`) (esses arquivos também estão presentes ao final da pagina
-do [link](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/consultas/dados-publicos-cnpj))
+do [link](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj))
 .
 
 **Os dados são atualizados mensalmente**. Para realizar a atualização dos dados veja a seção de `UPDATE`.
@@ -133,7 +132,8 @@ DB_MODEL_REF_DATE=rf_ref_date
 
 Por default os nomes da tabela serão esses (mais detalhes no arquivo [settings.py](src/settings.py)):
 
-> Para se conectar no postgres em algum visualizador (exemplo: DBeaver) coloque as seguintes configurações se você as configurou conforme mostrado acima: <br>
+> Para se conectar no postgres em algum visualizador (exemplo: DBeaver) coloque as seguintes configurações se você as
+> configurou conforme mostrado acima: <br>
 > host: localhost <br>
 > database: rf_dados_publicos_cnpj <br>
 > porta: 5433 (ver docker-compose.yaml) <br>
@@ -159,7 +159,7 @@ $ make db-setup
 ```
 
 6. Execute para fazer o **_download_** e **_unzip_** dos arquivos
-   do [link](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/consultas/dados-publicos-cnpj):
+   do [link (recursos)](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj):
 
 ```terminal
 $ make io-download-and-unzip
@@ -198,7 +198,8 @@ $ make io-download-and-unzip
 > $ make engine-company
 > ```
 >
-> 12. Execute para fazer a carga/processamento do `rf_ref_date` que diz a data de referencia dos arquviso processados para o postgres:
+> 12. Execute para fazer a carga/processamento do `rf_ref_date` que diz a data de referencia dos arquviso processados
+	  para o postgres:
 >
 > ```terminal
 > $ make engine-ref-date
