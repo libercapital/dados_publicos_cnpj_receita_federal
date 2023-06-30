@@ -134,12 +134,11 @@ class CompanyRootSimples(Base, DBModelConfig):
 class CompanyTaxRegime(Base, DBModelConfig):
     __tablename__ = settings.DB_MODEL_COMPANY_TAX_REGIME
 
-    ref_year = Column('ref_year', String)
+    ref_year = Column('ref_year', String, primary_key=True)
     cnpj = Column('cnpj', String, primary_key=True, index=True)
-
-    tax_regime = Column('tax_regime', String)
-    city = Column('city_name', String)
-    uf = Column('fu', String)
+    cnpj_scp = Column('cnpj_scp', String)
+    tax_regime = Column('tax_regime', String, primary_key=True)
+    amount_of_bookkeeping = Column('amount_of_bookkeeping', Float)
 
     N_RAW_COLUMNS = 5
     # RAW COLUMNS FOR PARSER ENDS HERE

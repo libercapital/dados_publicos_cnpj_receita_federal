@@ -33,17 +33,14 @@ def main():  # pragma: no cover
             try:
                 # try to open file
                 archive = zipfile.ZipFile(path_save_file, 'r')
-                print(f"[x] already downloaded [ ] not fully downloaded [ ] file not exists: '{path_save_file}'")
+                print(f"'{path_save_file:60}' - [GO] already downloaded")
                 continue
             except zipfile.BadZipFile:
                 # if file cannot be opened then it is not ready
-                size_downloaded = os.path.getsize(path_save_file)
-                print(
-                    f"[ ] already downloaded [x] not fully downloaded [ ] file not exists: '{path_save_file} --- rate:{size_downloaded / file_size_bytes:.1%}")
+                print(f"'{path_save_file:60}' - [NO GO] not fully downloaded")
                 list_needs_download.append(path_save_file)
             except FileNotFoundError:
-                print(
-                    f"[ ] already downloaded [ ] not fully downloaded [x] file not exists: '{path_save_file}")
+                print(f"'{path_save_file:60}' - [NO GO] file not exists")
                 list_needs_download.append(path_save_file)
 
             t = threading.Thread(target=download_file,

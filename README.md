@@ -4,7 +4,7 @@
 
 Esse repositório consiste na Extração, Transformação e Carregamento (ETL) dos dados públicos dos CNPJ's de todas as ~60
 milhões de empresas do Brasil disponibilizadas pela Receita Federal
-nesse [link](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj)
+nesse [link](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica---cnpj)
 para um banco relacional ([postgres](https://www.postgresql.org/)) utilizando Docker.
 
 ## **Sumário**
@@ -47,7 +47,7 @@ Para o `regime tributário` ver esse [pdf](docs/layout-regime-tributario.pdf)
 
 Além disso existem ainda outros arquivos que mapeiam algumas informações de cada `.csv` tal como o código da natureza
 jurídica para seu nome (`2046 -> Sociedade Anônima Aberta`) (esses arquivos também estão presentes ao final da pagina
-do [link](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj))
+do [link](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica---cnpj))
 .
 
 **Os dados são atualizados mensalmente**. Para realizar a atualização dos dados veja a seção de `UPDATE`.
@@ -136,7 +136,7 @@ Por default os nomes da tabela serão esses (mais detalhes no arquivo [settings.
 > configurou conforme mostrado acima: <br>
 > host: localhost <br>
 > database: rf_dados_publicos_cnpj <br>
-> porta: 5433 (ver docker-compose.yaml) <br>
+> porta: 5434 (ver docker-compose.yaml) <br>
 > usuário: postgres <br>
 > senha: postgres
 
@@ -159,7 +159,7 @@ $ make db-setup
 ```
 
 6. Execute para fazer o **_download_** e **_unzip_** dos arquivos
-   do [link (recursos)](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica-cnpj):
+   do [link (recursos)](https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica---cnpj):
 
 ```terminal
 $ make io-download-and-unzip
@@ -225,11 +225,11 @@ uptime em produção é:
 
 3. fazer a carga dos arquivos (step 7 -> 12 de `Setup & Launch`);
 
-4. renomear as tabelas antigas para `'_old'` (via _sql_);
+4. renomear as tabelas antigas para `'_old'` (via _sql_) (`$ ALTER TABLE rf_company RENAME TO rf_company_old;` ...);
 
-5. retirar o sufixo `'_new'` das tabelas novas (via _sql_);
+5. retirar o sufixo `'_new'` das tabelas novas (via _sql_); (`$ ALTER TABLE rf_company_new RENAME TO rf_company;` ...);
 
-6. deletar as antigas `'_old'` (via _sql_);
+6. deletar as antigas `'_old'` (via _sql_); (`$ DROP TABLE rf_company_old;` ...);
 
 ## **Estrutura do repositório**
 

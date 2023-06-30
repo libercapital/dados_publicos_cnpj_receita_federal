@@ -12,7 +12,7 @@ POSTGRES_DB = os.environ.get('POSTGRES_DB') or 'rf_dados_publicos_cnpj'
 db_uri_no_db = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}"
 ENGINE_NO_DB = create_engine(db_uri_no_db)
 db_uri = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
-ENGINE = create_engine(db_uri)
+ENGINE = create_engine(db_uri, isolation_level="AUTOCOMMIT")
 
 DB_MODEL_COMPANY = os.getenv('DB_MODEL_COMPANY') or 'rf_company'
 DB_MODEL_COMPANY_TAX_REGIME = os.getenv('DB_MODEL_COMPANY_TAX_REGIME') or 'rf_company_tax_regime'

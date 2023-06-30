@@ -10,7 +10,7 @@ from src.db_models.utils import delete_index, delete_pk, create_index
 from src.engine.core import EngineCore
 from src.io.get_last_ref_date import main as get_last_ref_date
 
-_type_file = ['IMUNES E ISENTAS', 'LUCRO ARBITRADO', 'LUCRO PRESUMIDO', 'LUCRO REAL']
+_type_file = ['Imunes e isentas', 'Lucro Arbitrado', 'Lucro Presumido', 'Lucro Real']
 
 
 class CompanyTaxRegime(EngineCore):

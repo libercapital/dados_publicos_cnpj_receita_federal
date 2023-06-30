@@ -65,7 +65,7 @@ def test_get_files_dict_tax_regime(fixture_get_files_dict):
     dict_files = fixture_get_files_dict
     dict_files_target = dict_files['TAX_REGIME']
 
-    assert len(dict_files_target.keys()) == 1
+    assert len(dict_files_target.keys()) == 4
 
 
 def test_get_last_ref_date_mock_empresas(mocker):

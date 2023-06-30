@@ -67,7 +67,8 @@ def main():
     dict_files_url['folder_ref_date_save_zip'] = os.path.join(SRC_PATH, DATA_FOLDER, ref_date)
 
     # get page of tax regime
-    page_tax_regime = requests.get(f"{CORE_URL_FILES}/anual", headers=HEADERS)
+    _folder_tax_regime = 'regime_tributario'
+    page_tax_regime = requests.get(f"{CORE_URL_FILES}/{_folder_tax_regime}", headers=HEADERS)
     soup_tax_regime = BeautifulSoup(page_tax_regime.text, 'html.parser')
 
     table_tax_regime = soup_tax_regime.find('table')
@@ -89,7 +90,7 @@ def main():
                     file_size_bytes = 0
                 dict_files_url['TAX_REGIME'].update({file_name: {'last_modified': last_modified,
                                                                  'file_size_bytes': file_size_bytes,
-                                                                 'link_to_download': f"{CORE_URL_FILES}/anual/{file_name}",
+                                                                 'link_to_download': f"{CORE_URL_FILES}/{_folder_tax_regime}/{file_name}",
                                                                  'path_save_file': os.path.join(SRC_PATH, DATA_FOLDER,
                                                                                                 ref_date, file_name)}
                                                      })
