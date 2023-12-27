@@ -93,7 +93,6 @@ db-create-tables: up
 db-setup: up
 	@echo "SETUP"
 	@echo "sleeping 40 seconds in order to postgres start-up"
-	@sleep 40
 	@echo "Creating db"
 	@docker-compose run app python -c "from src.db_models.utils import create_db, create_or_drop_all_tables; create_db();create_or_drop_all_tables(cmd='create')"
 	@echo ""

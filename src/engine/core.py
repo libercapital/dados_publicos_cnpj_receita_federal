@@ -95,12 +95,14 @@ class EngineCore(ABC):
         pass
 
     def _display_status(self, dict_status):
+        filename = dict_status['filename']
         total_rows_file = dict_status['total_rows_file']
         lasts_this_round = dict_status['lasts_this_round']
         lasts_since_begin_file = dict_status['lasts_since_begin_file']
         lasts_since_begin_global = dict_status['lasts_since_begin_global']
         ingestion_rate_global = self._total_rows_global / max(lasts_since_begin_global, 1)
         now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"\t\t{now:<20} | filename: {filename}")
         print(f"\t\t{now:<20} | rows: {total_rows_file:<10_}/{self._total_rows_global:<10_}")
         print(
             f"\t\t{now:<20} | time: {lasts_this_round:<.2f}, since begin file {lasts_since_begin_file}, since begin global {lasts_since_begin_global} [s]")

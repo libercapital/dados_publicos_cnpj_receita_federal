@@ -5,8 +5,8 @@ from src.db_models.utils import check_pk_exists
 
 def test_db_models_utils_check_pk_exists_true(mocker):
     mock_engine = Mock()
-    mocker.patch('src.db_models.utils.settings.ENGINE', mock_engine)
-    mock_engine.execute.return_value = [('pk1', 0)]
+    mocker.patch('src.db_models.utils.execute_sql_cmd', mock_engine)
+    mock_engine.return_value = [('pk1', 0)]
 
     return_expected = check_pk_exists(table_name='tbl1')
 
@@ -15,8 +15,8 @@ def test_db_models_utils_check_pk_exists_true(mocker):
 
 def test_db_models_utils_check_pk_exists_false(mocker):
     mock_engine = Mock()
-    mocker.patch('src.db_models.utils.settings.ENGINE', mock_engine)
-    mock_engine.execute.return_value = []
+    mocker.patch('src.db_models.utils.execute_sql_cmd', mock_engine)
+    mock_engine.return_value = []
 
     return_expected = check_pk_exists(table_name='tbl1')
 
