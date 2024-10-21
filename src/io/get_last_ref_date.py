@@ -29,10 +29,7 @@ def main():
         if row.find_all('td'):
             if row.find_all('td')[1].find('a')['href']:
                 # get last modified time and parse to date (ex: '2021-07-19')
-                try:
-                    list_last_modified_at.append(row.find_all('td')[1].find('a')['href'].replace('/', ''))
-                except ValueError as e:
-                    print('not a date: ', e)
+                list_last_modified_at.append(row.find_all('td')[1].find('a')['href'].replace('/', ''))
     # get the most common on 'last_modified' from source
     list_last_modified_at.remove('CNPJ')
     ref_date = max(list_last_modified_at)
