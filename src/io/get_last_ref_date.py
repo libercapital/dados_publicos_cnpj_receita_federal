@@ -23,15 +23,14 @@ def main():
     table = soup.find('table')
     rows = table.find_all('tr')
     list_last_modified_at = []
-    breakpoint()
+
     print('creating dict files url')
     for row in rows:
         if row.find_all('td'):
-            if row.find_all('td')[1].find('a')['href']:
+            if row.find_all('td')[1].find('a')['href'].replace('-', '').replace('/', '').isdigit():
                 # get last modified time and parse to date (ex: '2021-07-19')
                 list_last_modified_at.append(row.find_all('td')[1].find('a')['href'].replace('/', ''))
     # get the most common on 'last_modified' from source
-    list_last_modified_at.remove('CNPJ')
     ref_date = max(list_last_modified_at)
     print('last updated date is ', ref_date)
 
