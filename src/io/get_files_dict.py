@@ -19,7 +19,9 @@ def main():
     ref_date = get_last_ref_date()
 
     # get page content
-    page = requests.get(CORE_URL_FILES, headers=HEADERS)
+    _folder_open_date = 'dados_abertos_cnpj'
+    CORE_URL = f'{CORE_URL_FILES}/{_folder_open_date}/{ref_date}'
+    page = requests.get(CORE_URL, headers=HEADERS)
 
     # BeautifulSoup object
     soup = BeautifulSoup(page.text, 'html.parser')
@@ -52,7 +54,7 @@ def main():
 
                 dict_core = {file_name: {'last_modified': last_modified,
                                          'file_size_bytes': file_size_bytes,
-                                         'link_to_download': f"{CORE_URL_FILES}/{file_name}",
+                                         'link_to_download': f"{CORE_URL}/{file_name}",
                                          'path_save_file': os.path.join(SRC_PATH, DATA_FOLDER, ref_date, file_name)}
                              }
                 if 'Socios' in file_name:
