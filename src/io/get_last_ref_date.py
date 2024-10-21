@@ -23,7 +23,7 @@ def main():
     table = soup.find('table')
     rows = table.find_all('tr')
     list_last_modified_at = []
-
+    breakpoint()
     print('creating dict files url')
     for row in rows:
         if row.find_all('td'):
