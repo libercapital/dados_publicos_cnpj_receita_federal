@@ -33,7 +33,7 @@ def main():
     # get the most common on 'last_modified' from source
     ref_date = max(list_last_modified_at)
     print('last updated date is ', ref_date)
-    breakpoint()
+
     return ref_date
 
 
