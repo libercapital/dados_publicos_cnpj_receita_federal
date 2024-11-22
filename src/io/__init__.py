@@ -1,5 +1,5 @@
 CORE_URL = "https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/consultas/dados-publicos-cnpj"
-CORE_URL_FILES = "http://200.152.38.155/CNPJ"
+CORE_URL_FILES = "https://arquivos.receitafederal.gov.br/dados/cnpj"
 CNAE_JSON_NAME = 'cnaes.json'
 NATJU_JSON_NAME = 'natju.json'
 QUAL_SOCIO_JSON_NAME = 'qual_socio.json'
