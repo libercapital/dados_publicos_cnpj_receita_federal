@@ -11,15 +11,17 @@ env:
 
 jobs:
   run_tests:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-        name: clone this repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        id: checkout
 
-      - name: build img
-        run: make build-img
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
 
       - name: create local env file
         run: |
