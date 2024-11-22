@@ -20,7 +20,7 @@ RUN pip install --user --no-cache-dir -r requirements/requirements.txt \
                                            -name '*.jpeg' -name '*.js.map' -name '*.pyc' -name '*.c' -name '*.pxc' \
                                            -name '*.pyc' -delete \
     && find /usr/local/lib/python3.8 -name '__pycache__' | xargs rm -r
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 COPY src/ src/
 COPY tests/ tests/
