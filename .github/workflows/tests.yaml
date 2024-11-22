@@ -23,6 +23,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y docker-compose
 
+      - name: build img
+        run: make build-img
+
       - name: create local env file
         run: |
           touch .env
