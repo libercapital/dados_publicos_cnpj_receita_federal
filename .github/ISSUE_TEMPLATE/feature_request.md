@@ -1,3 +1,12 @@
+---
+name: Feature Request
+about: Sugira uma nova funcionalidade ou melhoria para o projeto
+title: '[FEATURE] Título da Funcionalidade'
+labels: 'feature'
+assignees: ''
+
+---
+
 **Descrição da Funcionalidade**  
 Descreva de forma clara e concisa a funcionalidade ou melhoria desejada.
 
