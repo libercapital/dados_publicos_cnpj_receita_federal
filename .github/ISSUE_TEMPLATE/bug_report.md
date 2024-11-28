@@ -1,3 +1,13 @@
+---
+name: Bug report
+about: Use este template para relatar um problema
+title: '[BUG] Título da Funcionalidade'
+labels: 'bug'
+assignees: ''
+
+---
+
+
 **Descrição**  
 Descreva-o de forma clara e concisa; descreva o que está acontecendo ou, então, a melhoria sugerida.
 
